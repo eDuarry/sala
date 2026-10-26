@@ -35,7 +35,7 @@
   var t = JSON.stringify(titulo);
   var url = "https://meet.jit.si/" + encodeURIComponent("Nodo41-" + (function () {
     try { return decodeURIComponent(ruta); } catch (e) { return ruta; } })()) +
-    "#config.subject=" + encodeURIComponent(t) + "&config.callDisplayName=" + encodeURIComponent(t);
+    "#config.subject=" + encodeURIComponent(t) + "&config.callDisplayName=" + encodeURIComponent(t) + "&config.disableDeepLinking=true";   // en el móvil, entrar desde el navegador (sin pedir la app)
   document.getElementById("t").textContent = titulo;
   document.title = titulo;
   document.getElementById("ir").href = url;
