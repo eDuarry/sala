@@ -43,14 +43,14 @@
   </div>
 </main>
 <script>
-// Página de inicio de sala.nodo41.com: crea el enlace de una sala para un cliente. Las salas las abre 404.html.
+// Página de inicio de meet.nodo41.com: crea el enlace de una sala para un cliente. Las salas las abre 404.html.
 // Ver eDuarry/olimpo, docs/nodo41.md («Cal.diy»).
 var $ = function (id) { return document.getElementById(id); };
 function crear() {
   var nombre = $("nombre").value.trim().replace(/[\/?#%]+/g, " ").trim().replace(/\s+/g, "-") || "Cliente";
   var codigo = crypto.randomUUID ? crypto.randomUUID()
     : Array.from(crypto.getRandomValues(new Uint8Array(16)), function (b) { return b.toString(16).padStart(2, "0"); }).join("");
-  var url = "https://sala.nodo41.com/" + nombre + "-" + codigo;   // con tildes tal cual: se lee mejor al enviarlo
+  var url = "https://meet.nodo41.com/" + nombre + "-" + codigo;   // con tildes tal cual: se lee mejor al enviarlo
   $("enlace").textContent = url;
   $("entrar").href = url;
   $("resultado").hidden = false;
