@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Nodo41 · Videollamada</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #111318; color: #e9ebf0;
+         font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; text-align: center; }
+  main { padding: 24px 16px; }
+  h1 { font-size: 22px; margin: 0 0 8px; }
+  p { color: #9aa3b2; margin: 0 0 20px; }
+  a { display: inline-block; padding: 12px 22px; border-radius: 10px; background: #2f6fdf; color: #fff; text-decoration: none; font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+  <h1 id="t">Nodo41 · Videollamada</h1>
+  <p>Abriendo la sala…</p>
+  <a id="ir" href="https://meet.jit.si/">Entrar en la videollamada</a>
+</main>
+<script>
+// sala.nodo41.com/<Nombre-del-cliente>-<uuid> (lo genera Cal.diy, app Jitsi: host https://sala.nodo41.com,
+// patrón {Scheduler}-{uuid}) → sala de meet.jit.si «Nodo41-<lo mismo>» con el título «Nodo41 · <Nombre>».
+// El uuid hace que la sala no se pueda adivinar; el título solo cambia lo que se ve. Ver docs/nodo41.md, «Cal.diy».
+(function () {
+  var ruta = location.pathname.replace(/^\/+|\/+$/g, "");
+  if (!ruta) { location.replace("https://nodo41.com"); return; }
+  var nombre;
+  try { nombre = decodeURIComponent(ruta); } catch (e) { nombre = ruta; }
+  nombre = nombre.replace(/-?[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i, "").replace(/[-_]+/g, " ").trim();
+  var titulo = "Nodo41" + (nombre ? " · " + nombre : "");
+  var t = JSON.stringify(titulo);
+  var url = "https://meet.jit.si/" + encodeURIComponent("Nodo41-" + (function () {
+    try { return decodeURIComponent(ruta); } catch (e) { return ruta; } })()) +
+    "#config.subject=" + encodeURIComponent(t) + "&config.callDisplayName=" + encodeURIComponent(t);
+  document.getElementById("t").textContent = titulo;
+  document.title = titulo;
+  document.getElementById("ir").href = url;
+  location.replace(url);
+})();
+</script>
+</body>
+</html>
